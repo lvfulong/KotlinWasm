@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WASM with Kotlin</title>
+    <style>
+      html, body {
+        width:  100%;
+        height: 100%;
+        margin: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas">
+  </canvas> 
+    <script src="./stats.wasm.js"></script>
+    <script>
+        konan.libraries.push({"imported_igotdata":function(msg){ alert("I got the data, updating");}})
+        var filename = "./stats.wasm";
+        fetch(filename).then( function(response) {
+            return response.arrayBuffer();
+        }).then(function(arraybuffer) {
+            instantiateAndRun(arraybuffer, [filename]);
+        });
+    </script>
+  </body>
+</html>
